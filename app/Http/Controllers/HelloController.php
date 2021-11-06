@@ -13,28 +13,13 @@ class HelloController extends Controller
 {   
     public function index(Request $request)
     {
+        phpinfo();
         $user = Auth::user();
         $sort = $request->sort;
-        $items = Person::get();
+        $items = Person::paginate(5);
         $param = ['items' => $items, 'sort' => $sort, 'user'=>$user];
         return view('hello.index', $param);
-        // if($request->hasCookie('msg')){
-        //     $msg = 'Cookie:' . $request->cookie('msg');
-        // }else{
-        //     $msg = '※クッキーはありません。';
-        // }
-        // if(isset($request->id)){
-        //     $param = ['id' => $request->id];
-        //     $items = DB::select('select * from people where id = :id',$param);
-        // }else{
-        //}
-
-        // if(!$request->sort) {
-        //     $sort = 'id';
-        // } else {
-        //     $sort = $request->sort;
-        // }
-        // // dd($items);
+    
     }
 
     public function post(Request $request)

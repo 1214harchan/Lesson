@@ -33,6 +33,7 @@ class RegisterRequest extends FormRequest
             'mail'=>'email',
             'passcon_confirmation'=>['required','min:8',new Hankaku],
             'passcon'=>['required','confirmed','min:8',new Hankaku],
+            'job'=>'required',
             'looks'=>'required',
             'tabaco'=>'required',
             'alchol'=>'required',

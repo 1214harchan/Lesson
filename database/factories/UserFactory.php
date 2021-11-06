@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Person;
 
 class UserFactory extends Factory
 {
@@ -21,7 +22,8 @@ class UserFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   
+        $user = User::factory()->create();
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
@@ -37,6 +39,15 @@ class UserFactory extends Factory
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     public function unverified()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => null,
+            ];
+        });
+    }
+
+    public function person()
     {
         return $this->state(function (array $attributes) {
             return [
