@@ -36,6 +36,14 @@
     <tr><th>ERROR</th>
         <td>{{$message}}</td></tr>
     @enderror
+    @error('job')
+        <tr><th>ERROR</th>
+        <td>{{$message}}</td></tr>
+    @enderror
+    <tr><th>職業*：</th><td><input type="text" name="job" value="{{old('job')}}"></td></tr>
+    @error('mail')
+        <tr><th>ERROR</th>
+        <td>{{$message}}</td></tr>
     <tr><th>見た目*</th>
         <td><input type="radio" name="looks" value="fem">フェム</td>
         <td><input type="radio" name="looks" value="genderless">中性</td>
