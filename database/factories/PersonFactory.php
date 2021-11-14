@@ -22,11 +22,10 @@ class PersonFactory extends Factory
      */
     public function definition()
     {   
-        $Person = Person::factory()->create();
-        return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'age' => $this->faker->randomNumber(),
+            return [
+            'name' => $this->faker->name,
+            'mail' => $this->faker->unique->safeEmail,
+            'age' => $this->faker->randomNumber,
         ];
     }
 

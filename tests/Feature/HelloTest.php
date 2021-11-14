@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class HelloTest extends TestCase
 {
@@ -14,9 +16,24 @@ class HelloTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    use DatabaseMigrations;
+
+    public function testHello()
     {
         $this->assertTrue(true);
+
+        $response = $this->get('/');
+        $response->assertStatus(200);
+
+        $response = $this->get('/hello');
+        $response->assertStatus(302);
+
+        $user = User::factory(1)->create();
+        $response = $this->actingAs($user)->get('/hello');
+        $response->assertStatus(200);
+
+        $response = $this->get('/no_route');
+        $response->assertStatus(404);
 
         $arr = [];
         $this->assertEmpty($arr);
